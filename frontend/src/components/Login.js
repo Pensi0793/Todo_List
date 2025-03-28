@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../api'; // Import instance axios đã cấu hình
 import { Button, Form, Input, message } from 'antd';
 
 const Login = ({ setToken }) => {
@@ -9,7 +9,7 @@ const Login = ({ setToken }) => {
   const handleSubmit = async (values) => {
     setIsLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', {
+      const res = await api.post('/api/auth/login', { // Dùng api thay vì axios
         username: values.username,
         password: values.password,
       });
@@ -30,7 +30,7 @@ const Login = ({ setToken }) => {
   };
 
   return (
-    <div className="Auth-container"> {/* Class để dùng App.css */}
+    <div className="Auth-container">
       <h2 className="Auth-title">Đăng nhập</h2>
       <Form
         form={form}
